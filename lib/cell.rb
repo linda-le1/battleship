@@ -9,7 +9,7 @@ class Cell
 
   def initialize(coordinate)
     @coordinate = coordinate
-    @ship = []
+    @ship = nil
     @fired_upon_status = false
   end
 
@@ -18,11 +18,11 @@ class Cell
   end
 
   def empty?
-    @ship == []
+    @ship == nil
   end
 
   def place_ship(ship_to_be_placed)
-    @ship << ship_to_be_placed
+    @ship = ship_to_be_placed
   end
 
   def fired_upon?
@@ -30,35 +30,35 @@ class Cell
   end
 
   def fire_upon
-    @fired_upon_status = true
     if @ship != nil
-      @ship.first.health -= 1
+      @ship.health -= 1
     end
+    @fired_upon_status = true
   end
 
   def render(value = false)
     if value == true
-      if @ship.first == nil && @fired_upon_status == false
+      if @ship == nil && @fired_upon_status == false
         "."
-      elsif @ship.first == nil && @fired_upon_status == true
+      elsif @ship == nil && @fired_upon_status == true
         "M"
-      elsif @ship.first != nil && @fired_upon_status == true && @ship.first.health == 0
+      elsif @ship != nil && @fired_upon_status == true && @ship.health == 0
         "X"
-      elsif @ship.first != nil && @fired_upon_status == false
+      elsif @ship != nil && @fired_upon_status == false
         "S"
-      elsif @ship.first != nil && @fired_upon_status == true
+      elsif @ship != nil && @fired_upon_status == true
         "H"
       end
     else
-      if @ship.first == nil && @fired_upon_status == false
+      if @ship == nil && @fired_upon_status == false
         "."
-      elsif @ship.first == nil && @fired_upon_status == true
+      elsif @ship == nil && @fired_upon_status == true
         "M"
-      elsif @ship.first != nil && @fired_upon_status == true && @ship.first.health == 0
+      elsif @ship != nil && @fired_upon_status == true && @ship.health == 0
         "X"
-      elsif @ship.first != nil && @fired_upon_status == false
+      elsif @ship != nil && @fired_upon_status == false
         "."
-      elsif @ship.first != nil && @fired_upon_status == true
+      elsif @ship != nil && @fired_upon_status == true
         "H"
       end
     end

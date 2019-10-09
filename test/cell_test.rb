@@ -27,7 +27,7 @@ class CellTest < MiniTest::Test
     assert_equal true, @cell.empty?
     @cell.place_ship(@cruiser)
     assert_equal false, @cell.empty?
-    assert_equal @cruiser, @cell.ship.first
+    assert_equal @cruiser, @cell.ship
   end
 
   def test_it_can_be_fired_upon
@@ -39,7 +39,7 @@ class CellTest < MiniTest::Test
     @cell.place_ship(@cruiser)
     @cell.fire_upon
     assert_equal true, @cell.fired_upon?
-    assert_equal 2, @cell.ship.first.health
+    assert_equal 2, @cell.ship.health
   end
 
   def test_the_render_method

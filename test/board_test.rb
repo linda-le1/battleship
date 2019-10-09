@@ -10,6 +10,8 @@ class BoardTest < MiniTest::Test
 
   def setup
     @board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
   end
 
   def test_assert_instance_of
