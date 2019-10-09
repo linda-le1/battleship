@@ -36,18 +36,31 @@ class Cell
     end
   end
 
-  def render
-    #binding.pry
-    if @ship.first == nil && @fired_upon_status == false
-      "."
-    elsif @ship.first == nil && @fired_upon_status == true
-      "M"
-    elsif @ship.first != nil && @fired_upon_status == true && @ship.first.health == 0
-      "X"
-    elsif @ship.first != nil && @fired_upon_status == false
-      "S"
-    elsif @ship.first != nil && @fired_upon_status == true
-      "H"
+  def render(value = false)
+    if value == true
+      if @ship.first == nil && @fired_upon_status == false
+        "."
+      elsif @ship.first == nil && @fired_upon_status == true
+        "M"
+      elsif @ship.first != nil && @fired_upon_status == true && @ship.first.health == 0
+        "X"
+      elsif @ship.first != nil && @fired_upon_status == false
+        "S"
+      elsif @ship.first != nil && @fired_upon_status == true
+        "H"
+      end
+    else
+      if @ship.first == nil && @fired_upon_status == false
+        "."
+      elsif @ship.first == nil && @fired_upon_status == true
+        "M"
+      elsif @ship.first != nil && @fired_upon_status == true && @ship.first.health == 0
+        "X"
+      elsif @ship.first != nil && @fired_upon_status == false
+        "."
+      elsif @ship.first != nil && @fired_upon_status == true
+        "H"
+      end
     end
   end
 

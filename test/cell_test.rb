@@ -46,9 +46,9 @@ class CellTest < MiniTest::Test
     cell_1 = Cell.new("C3")
     assert_equal ".", cell_1.render
     cell_1.place_ship(@cruiser)
-    assert_equal "S", cell_1.render
+    assert_equal "S", cell_1.render(true)
     cell_1.fire_upon
-    assert_equal "H", cell_1.render
+    assert_equal "H", cell_1.render(true)
   end
 
 end
