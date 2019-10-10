@@ -1,5 +1,5 @@
 class Board
-  attr_reader :cells, :permutations
+  attr_reader :cells
   def initialize
     @cells = make_board
   end
@@ -37,7 +37,7 @@ class Board
     end
     diagonal_check(ship, coordinates) == true
     valid_coordinate?(coordinates) == true
-      if permutations(ship).include?(coordinates_in_ordinal)
+      if permutations(ship).include?(coordinates_in_ordinal) || numbers_permutations(ship).include?(number)
         true
       else
         false
@@ -48,6 +48,12 @@ class Board
     x = []
     (65..68).each_cons(ship.length) { |a| x << a }
     x
+  end
+
+  def numbers_permutations(ship)
+    y = []
+    (1..4).each_cons(ship.length) { |a| y << a }
+    y
   end
   # def coordinates_already_used(coordinates)
   #   coordinates_to_check.each do |coordinate|
