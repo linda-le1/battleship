@@ -28,32 +28,24 @@ class Board
     @cells.include?(coordinate)
   end
 
-  def valid_placement?(ship, coordinates)
-    ship_is_in_straight_line(ship, coordinates)
+  def ship_placement(ship, coordinates)
 
-  end
+    if ship.length == coordinates.length
+      letter = coordinates.map { |coordinates| coordinates[0] }
+      number = coordinates.map { |coordinates| coordinates[1] }
 
-  def ship_is_in_straight_line(ship, coordinates)
-    if ship.length == coordinates.count
-      letter = array.map { |coordinates| coordinates[0] }
-      number = array.map { |coordinates| coordinates[1] }
-      yrange = Range.new(letter.sort.first, letter.sort.last).count
-      xrange = Range.new(number.sort.first, number.sort.last).count
-      #horizontal placement
-      if xrange == ship.length && letter.uniq.count == 1
+      if number.uniq.count == ship.length && letter.uniq.count == 1
         true
-      #veritcal placement
-      elsif yrange == ship.length && number.uniq.count == 1
+      elsif letter.uniq.count == ship.length && number.uniq.count == 1
         true
       else
         false
       end
+
+      else false
     end
   end
 
-  def coordinates_already_used(coordinates)
-    coordinates_to_check.each do |coordinate|
-      
-
-
+  # def coordinates_already_used(coordinates)
+  #   coordinates_to_check.each do |coordinate|
 end
