@@ -25,7 +25,6 @@ class Board
   end
 
   def valid_coordinate?(coordinates)
-    
     @cells.include?(coordinates)
   end
 
@@ -36,10 +35,13 @@ class Board
     letter.each do |letter|
       coordinates_in_ordinal << letter.ord
     end
-    diagonal_check == true
-    valid_coordinate == true
-    permutations
-
+    diagonal_check(ship, coordinates) == true
+    valid_coordinate?(coordinates) == true
+      if permutations(ship).include?(coordinates_in_ordinal)
+        true
+      else
+        false
+      end
   end
 
   def permutations(ship)
@@ -49,7 +51,10 @@ class Board
   end
   # def coordinates_already_used(coordinates)
   #   coordinates_to_check.each do |coordinate|
-  def diagonal_check
+
+  def diagonal_check(ship, coordinates)
+  letter = coordinates.map { |coordinates| coordinates[0] }
+  number = coordinates.map { |coordinates| coordinates[1] }
     if ship.length == coordinates.length
       if number.uniq.count == ship.length && letter.uniq.count == 1
         true
