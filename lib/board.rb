@@ -1,5 +1,5 @@
 class Board
-  attr_reader :cells
+  attr_reader :cells, :permutations
   def initialize
     @cells = make_board
   end
@@ -29,11 +29,16 @@ class Board
   end
 
   def ship_placement(ship, coordinates)
+    #permutations_of_letters = (65..68).each_cons(ship.length) { |a| p a }
+    letter = coordinates.map { |coordinates| coordinates[0] }
+    number = coordinates.map { |coordinates| coordinates[1] }
+    #permutations_of_letters = []
+    coordinates_in_ordinal = []
+    letter.each do |letter|
+      coordinates_in_ordinal << letter.ord
+    end
 
     if ship.length == coordinates.length
-      letter = coordinates.map { |coordinates| coordinates[0] }
-      number = coordinates.map { |coordinates| coordinates[1] }
-
       if number.uniq.count == ship.length && letter.uniq.count == 1
         true
       elsif letter.uniq.count == ship.length && number.uniq.count == 1
@@ -41,11 +46,16 @@ class Board
       else
         false
       end
-
-      else false
+    else
+      false
     end
   end
 
+  def permutations(ship)
+    x = []
+    (65..68).each_cons(ship.length) { |a| x << a }
+    x
+  end
   # def coordinates_already_used(coordinates)
   #   coordinates_to_check.each do |coordinate|
 end
