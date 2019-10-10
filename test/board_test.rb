@@ -34,8 +34,8 @@ class BoardTest < MiniTest::Test
     assert_equal false, @board.ship_placement(@submarine, ["B8", "B2"])
     assert_equal false, @board.ship_placement(@submarine, ["A1", "C3"])
     assert_equal true, @board.ship_placement(@submarine, ["C4", "D4"])
-    # assert_equal true, @board.ship_placement(@submarine,["C1", "C2"])
-    # assert_equal true, @board.ship_placement(@cruiser, ["B1", "B2", "B3"])
+    assert_equal true, @board.ship_placement(@submarine,["C1", "C2"])
+    assert_equal true, @board.ship_placement(@cruiser, ["B1", "B2", "B3"])
   end
 
   def test_permutations

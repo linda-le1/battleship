@@ -28,39 +28,62 @@ class Board
     @cells.include?(coordinates)
   end
 
+  # def ship_placement(ship, coordinates)
+    # letter = coordinates.map { |coordinates| coordinates[0] }
+    # number = coordinates.map { |coordinates| coordinates[1] }
+    # coordinates_in_ordinal = []
+    # letter.each do |letter|
+    #   coordinates_in_ordinal << letter.ord
+    # end
+  #   diagonal_check(ship, coordinates) == true
+  #   valid_coordinate?(coordinates) == true
+  #     if permutations(ship).include?(coordinates_in_ordinal) || numbers_permutations(ship).include?(number)
+  #       true
+  #     else
+  #       false
+  #     end
+  # end
+
   def ship_placement(ship, coordinates)
-    letter = coordinates.map { |coordinates| coordinates[0] }
-    number = coordinates.map { |coordinates| coordinates[1] }
-    coordinates_in_ordinal = []
-    letter.each do |letter|
-      coordinates_in_ordinal << letter.ord
-    end
-    diagonal_check(ship, coordinates) == true
-    valid_coordinate?(coordinates) == true
-      if permutations(ship).include?(coordinates_in_ordinal) || numbers_permutations(ship).include?(number)
-        true
-      else
-        false
+    numbers_permutations(ship)
+    permutations(ship)
+    if ship.length == coordinates.length
+    #diagonal_check(ship, coordinates)
+    # letter = coordinates.map { |coordinates| coordinates[0] }
+    # number = coordinates.map { |coordinates| coordinates[1] }
+    # coordinates_in_ordinal = []
+    # letter.each do |letter|
+    #   coordinates_in_ordinal << letter.ord
+    #end
+      ship_valid = false
+      if diagonal_check(ship, coordinates) == true &&  @x.include?(diagonal_check.number)== true
+        ship_valid = true
+      else diagonal_check(ship, coordinates) == true &&  @y.include?(coordinates_in_ordinal)== true
+        ship_valid = true
       end
-  end
+    ship_valid
+    end
+    else
+      false
+end
 
   def permutations(ship)
-    x = []
-    (65..68).each_cons(ship.length) { |a| x << a }
-    x
+    @x = []
+    (65..68).each_cons(ship.length) { |a| @x << a }
+    @x
   end
 
   def numbers_permutations(ship)
-    y = []
-    (1..4).each_cons(ship.length) { |a| y << a }
-    y
+    @y = []
+    (1..4).each_cons(ship.length) { |a| @y << a }
+    @y
   end
   # def coordinates_already_used(coordinates)
   #   coordinates_to_check.each do |coordinate|
 
   def diagonal_check(ship, coordinates)
-  letter = coordinates.map { |coordinates| coordinates[0] }
-  number = coordinates.map { |coordinates| coordinates[1] }
+    letter = coordinates.map { |coordinates| coordinates[0] }
+    number = coordinates.map { |coordinates| coordinates[1] }
     if ship.length == coordinates.length
       if number.uniq.count == ship.length && letter.uniq.count == 1
         true
