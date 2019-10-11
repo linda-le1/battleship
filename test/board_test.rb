@@ -28,6 +28,7 @@ class BoardTest < MiniTest::Test
   end
 
   def test_ship_placement
+  # break out tests below and be more explicit about what is tested
     assert_equal false, @board.ship_placement(@cruiser, ["A1", "B1", "C1", "D1"])
     assert_equal true, @board.ship_placement(@cruiser, ["A1", "B1", "C1"])
     assert_equal false, @board.ship_placement(@cruiser, ["A1", "B1", "B2"])
@@ -36,12 +37,14 @@ class BoardTest < MiniTest::Test
     assert_equal true, @board.ship_placement(@submarine, ["C4", "D4"])
     assert_equal true, @board.ship_placement(@submarine,["C1", "C2"])
     assert_equal true, @board.ship_placement(@cruiser, ["B1", "B2", "B3"])
+    assert_equal false, @board.ship_placement(@submarine, ["Z1", "Z2"])
+    assert_equal false, @board.ship_placement(@cruiser, ["A1", "B2", "C3"])
   end
-
-  def test_permutations
-    x = @board.permutations(@submarine)
-    y = @board.numbers_permutations(@submarine)
-  end
-
+#
+#   def test_permutations
+#     x = @board.permutations(@submarine)
+#     y = @board.numbers_permutations(@submarine)
+#   end
+#
 end
 # binding.pry

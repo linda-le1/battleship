@@ -46,30 +46,44 @@ class Board
 
   def ship_placement(ship, coordinates)
     numbers_permutations(ship)
-    permutations(ship)
+    letters_permutations(ship)
+
+    letter = coordinates.map { |coordinates| coordinates[0] }
+    number = coordinates.map { |coordinates| coordinates[1].to_i }
+    coordinates_in_ordinal = []
+    letter.each do |letter|
+      coordinates_in_ordinal << letter.ord
+    end
+
+    # check if coordinates are outside the board
+    letters_inside_board = @x.flatten.uniq
+    numbers_inside_board = @y.flatten.uniq
+    if !(coordinates_in_ordinal - letters_inside_board).empty?
+      return false
+    end
+    if !(number - numbers_inside_board).empty?
+      return false
+    end
+
     if ship.length == coordinates.length
-    #diagonal_check(ship, coordinates)
-    # letter = coordinates.map { |coordinates| coordinates[0] }
-    # number = coordinates.map { |coordinates| coordinates[1] }
-    # coordinates_in_ordinal = []
-    # letter.each do |letter|
-    #   coordinates_in_ordinal << letter.ord
-    #end
       ship_valid = false
-      if diagonal_check(ship, coordinates) == true &&  @x.include?(diagonal_check.number)== true
-        ship_valid = true
-      else diagonal_check(ship, coordinates) == true &&  @y.include?(coordinates_in_ordinal)== true
+      # check if coordinates are diagonals
+      if diagonal_check(ship, coordinates) == true && @x.include?(coordinates_in_ordinal) == true
         ship_valid = true
       end
-    ship_valid
-    end
+      if diagonal_check(ship, coordinates) == true && @y.include?(number) == true
+        ship_valid = true
+      end
+      ship_valid
     else
       false
-end
+    end
+  end
 
-  def permutations(ship)
+  def letters_permutations(ship)
     @x = []
     (65..68).each_cons(ship.length) { |a| @x << a }
+    (65..68).each { |a| @x << Array.new(ship.length, a) }
     @x
   end
 
@@ -79,7 +93,7 @@ end
     @y
   end
   # def coordinates_already_used(coordinates)
-  #   coordinates_to_check.each do |coordinate|
+  #  coordinates_to_check.each do |coordinate|
 
   def diagonal_check(ship, coordinates)
     letter = coordinates.map { |coordinates| coordinates[0] }
