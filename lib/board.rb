@@ -28,22 +28,6 @@ class Board
     @cells.include?(coordinates)
   end
 
-  # def ship_placement(ship, coordinates)
-    # letter = coordinates.map { |coordinates| coordinates[0] }
-    # number = coordinates.map { |coordinates| coordinates[1] }
-    # coordinates_in_ordinal = []
-    # letter.each do |letter|
-    #   coordinates_in_ordinal << letter.ord
-    # end
-  #   diagonal_check(ship, coordinates) == true
-  #   valid_coordinate?(coordinates) == true
-  #     if permutations(ship).include?(coordinates_in_ordinal) || numbers_permutations(ship).include?(number)
-  #       true
-  #     else
-  #       false
-  #     end
-  # end
-
   def ship_placement(ship, coordinates)
     numbers_permutations(ship)
     letters_permutations(ship)
@@ -55,7 +39,6 @@ class Board
       coordinates_in_ordinal << letter.ord
     end
 
-    # check if coordinates are outside the board
     letters_inside_board = @x.flatten.uniq
     numbers_inside_board = @y.flatten.uniq
     if !(coordinates_in_ordinal - letters_inside_board).empty?
@@ -67,7 +50,6 @@ class Board
 
     if ship.length == coordinates.length
       ship_valid = false
-      # check if coordinates are diagonals
       if diagonal_check(ship, coordinates) == true && @x.include?(coordinates_in_ordinal) == true
         ship_valid = true
       end
@@ -92,8 +74,6 @@ class Board
     (1..4).each_cons(ship.length) { |a| @y << a }
     @y
   end
-  # def coordinates_already_used(coordinates)
-  #  coordinates_to_check.each do |coordinate|
 
   def diagonal_check(ship, coordinates)
     letter = coordinates.map { |coordinates| coordinates[0] }

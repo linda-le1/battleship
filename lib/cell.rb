@@ -1,8 +1,3 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'pry'
-
 class Cell
   attr_reader :coordinate
   attr_accessor :ship, :fired_upon_status

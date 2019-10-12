@@ -17,6 +17,7 @@ class BoardTest < MiniTest::Test
   def test_assert_instance_of
     assert_instance_of Board, @board
   end
+
   def test_it_has_cells
     assert_equal 16, @board.cells.count
   end
@@ -29,7 +30,7 @@ class BoardTest < MiniTest::Test
 
   def test_ship_placement
   # break out tests below and be more explicit about what is tested
-    assert_equal false, @board.ship_placement(@cruiser, ["A1", "B1", "C1", "D1"])
+
     assert_equal true, @board.ship_placement(@cruiser, ["A1", "B1", "C1"])
     assert_equal false, @board.ship_placement(@cruiser, ["A1", "B1", "B2"])
     assert_equal false, @board.ship_placement(@submarine, ["B8", "B2"])
@@ -40,11 +41,9 @@ class BoardTest < MiniTest::Test
     assert_equal false, @board.ship_placement(@submarine, ["Z1", "Z2"])
     assert_equal false, @board.ship_placement(@cruiser, ["A1", "B2", "C3"])
   end
-#
-#   def test_permutations
-#     x = @board.permutations(@submarine)
-#     y = @board.numbers_permutations(@submarine)
-#   end
-#
+
+  def test_ships_cannot_be_too_long
+    assert_equal false, @board.ship_placement(@cruiser, ["A1", "B1", "C1", "D1"])
+    assert_equal false, @board.ship_placement(@submarine, ["D1", "D2", "D3"])
+  end
 end
-# binding.pry

@@ -1,7 +1,3 @@
-gem 'minitest', '~> 5.2'
-require 'minitest/autorun'
-require 'minitest/pride'
-
 class Ship
 attr_reader :name, :length
 attr_accessor :health
