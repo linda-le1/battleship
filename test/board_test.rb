@@ -17,6 +17,7 @@ class BoardTest < MiniTest::Test
   def test_assert_instance_of
     assert_instance_of Board, @board
   end
+
   def test_it_has_cells
     assert_equal 16, @board.cells.count
   end
@@ -27,24 +28,35 @@ class BoardTest < MiniTest::Test
     assert_equal false, @board.valid_coordinate?("A8")
   end
 
-  def test_ship_placement
-  # break out tests below and be more explicit about what is tested
-    assert_equal false, @board.ship_placement(@cruiser, ["A1", "B1", "C1", "D1"])
+  def test_ship_properly_placed
     assert_equal true, @board.ship_placement(@cruiser, ["A1", "B1", "C1"])
-    assert_equal false, @board.ship_placement(@cruiser, ["A1", "B1", "B2"])
-    assert_equal false, @board.ship_placement(@submarine, ["B8", "B2"])
-    assert_equal false, @board.ship_placement(@submarine, ["A1", "C3"])
     assert_equal true, @board.ship_placement(@submarine, ["C4", "D4"])
     assert_equal true, @board.ship_placement(@submarine,["C1", "C2"])
     assert_equal true, @board.ship_placement(@cruiser, ["B1", "B2", "B3"])
-    assert_equal false, @board.ship_placement(@submarine, ["Z1", "Z2"])
-    assert_equal false, @board.ship_placement(@cruiser, ["A1", "B2", "C3"])
   end
-#
-#   def test_permutations
-#     x = @board.permutations(@submarine)
-#     y = @board.numbers_permutations(@submarine)
-#   end
-#
+
+  def test_ship_cannot_be_too_long
+    assert_equal false, @board.ship_placement(@cruiser, ["A1", "B1", "C1", "D1"])
+    assert_equal false, @board.ship_placement(@submarine, ["D1", "D2", "D3"])
+  end
+
+  def test_ship_cannot_be_placed_in_an_l_shape
+    assert_equal false, @board.ship_placement(@cruiser, ["A1", "B1", "B2"])
+    assert_equal false, @board.ship_placement(@cruiser, ["D1", "D2", "C2"])
+  end
+
+  def test_ship_cannot_have_spaces_between_assigned_spaces
+    assert_equal false, @board.ship_placement(@submarine, ["A1", "C3"])
+    assert_equal false, @board.ship_placement(@submarine, ["B1", "D1"])
+  end
+
+  def test_ship_cannot_be_placed_off_the_board
+    assert_equal false, @board.ship_placement(@submarine, ["Z1", "Z2"])
+    assert_equal false, @board.ship_placement(@submarine, ["B8", "B2"])
+  end
+
+  def test_ship_cannot_be_placed_diagonally
+    assert_equal false, @board.ship_placement(@cruiser, ["A1", "B2", "C3"])
+    assert_equal false, @board.ship_placement(@submarine, ["C3", "D4"])
+  end
 end
-# binding.pry
