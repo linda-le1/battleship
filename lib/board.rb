@@ -130,7 +130,9 @@ class Board
     puts "B " + @cells["B1"].render(status) + " " + @cells["B2"].render(status) + " " + @cells["B3"].render(status) + " " + @cells["B4"].render(status)
     puts "C " + @cells["C1"].render(status) + " " + @cells["C2"].render(status) + " " + @cells["C3"].render(status) + " " + @cells["C4"].render(status)
     puts "D " + @cells["D1"].render(status) + " " + @cells["D2"].render(status) + " " + @cells["D3"].render(status) + " " + @cells["D4"].render(status)
-    #line methods
-# + " " + "A2".render + " " + "A3".render + " " + "A4".render
+  end
+
+  def fire(coordinate)
+    @cells[coordinate].fire_upon
   end
 end
