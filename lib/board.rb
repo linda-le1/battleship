@@ -122,14 +122,14 @@ class Board
     end
   end
 
-  def render
+  def render(status = false)
     a_line = ["A1", "A2", "A3", "A4"]
     #require 'pry'; binding.pry
     puts " "
-    puts "  1 2 3 4\nA " + @cells["A1"].render + " " + @cells["A2"].render + " " + @cells["A3"].render + " " + @cells["A4"].render
-    puts "B " + @cells["B1"].render + " " + @cells["B2"].render + " " + @cells["B3"].render + " " + @cells["B4"].render
-    puts "C " + @cells["C1"].render + " " + @cells["C2"].render + " " + @cells["C3"].render + " " + @cells["C4"].render
-    puts "D " + @cells["D1"].render + " " + @cells["D2"].render + " " + @cells["D3"].render + " " + @cells["D4"].render
+    puts "  1 2 3 4\nA " + @cells["A1"].render(status) + " " + @cells["A2"].render(status) + " " + @cells["A3"].render(status) + " " + @cells["A4"].render(status)
+    puts "B " + @cells["B1"].render(status) + " " + @cells["B2"].render(status) + " " + @cells["B3"].render(status) + " " + @cells["B4"].render(status)
+    puts "C " + @cells["C1"].render(status) + " " + @cells["C2"].render(status) + " " + @cells["C3"].render(status) + " " + @cells["C4"].render(status)
+    puts "D " + @cells["D1"].render(status) + " " + @cells["D2"].render(status) + " " + @cells["D3"].render(status) + " " + @cells["D4"].render(status)
     #line methods
 # + " " + "A2".render + " " + "A3".render + " " + "A4".render
   end

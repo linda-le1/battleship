@@ -67,7 +67,11 @@ class BoardTest < MiniTest::Test
     assert_equal false, @board.cells["C1"].empty?
     assert_equal true, @board.cells["D1"].empty?
   end
+
   def test_render
     @board.render
+    @board.ship_is_not_on_ship(@submarine, ["A1", "A2"])
+    assert_equal false, @board.cells["A1"].empty?
+    @board.render(true)
   end
 end
