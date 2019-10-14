@@ -33,7 +33,6 @@ class Board
   #if does include coordinates, fail
 
   def ship_is_not_on_ship(ship, coordinates)
-    # require 'pry'; binding.pry
     if ship_placement(ship, coordinates) == true
       check = coordinates.all? do |coordinate|
                 @cells[coordinate].empty?
@@ -121,5 +120,17 @@ class Board
     else
       false
     end
+  end
+
+  def render
+    a_line = ["A1", "A2", "A3", "A4"]
+    #require 'pry'; binding.pry
+    puts " "
+    puts "  1 2 3 4\nA " + @cells["A1"].render + " " + @cells["A2"].render + " " + @cells["A3"].render + " " + @cells["A4"].render
+    puts "B " + @cells["B1"].render + " " + @cells["B2"].render + " " + @cells["B3"].render + " " + @cells["B4"].render
+    puts "C " + @cells["C1"].render + " " + @cells["C2"].render + " " + @cells["C3"].render + " " + @cells["C4"].render
+    puts "D " + @cells["D1"].render + " " + @cells["D2"].render + " " + @cells["D3"].render + " " + @cells["D4"].render
+    #line methods
+# + " " + "A2".render + " " + "A3".render + " " + "A4".render
   end
 end

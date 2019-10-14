@@ -67,4 +67,7 @@ class BoardTest < MiniTest::Test
     assert_equal false, @board.cells["C1"].empty?
     assert_equal true, @board.cells["D1"].empty?
   end
+  def test_render
+    @board.render
+  end
 end
