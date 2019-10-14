@@ -59,4 +59,12 @@ class BoardTest < MiniTest::Test
     assert_equal false, @board.ship_placement(@cruiser, ["A1", "B2", "C3"])
     assert_equal false, @board.ship_placement(@submarine, ["C3", "D4"])
   end
+
+  def test_ship_is_not_on_ship
+    @board.ship_is_not_on_ship(@cruiser, ["A1", "B1", "C1"])
+    assert_equal false, @board.cells["A1"].empty?
+    assert_equal false, @board.cells["B1"].empty?
+    assert_equal false, @board.cells["C1"].empty?
+    assert_equal true, @board.cells["D1"].empty?
+  end
 end

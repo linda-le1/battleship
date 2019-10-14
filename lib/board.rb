@@ -1,8 +1,11 @@
 class Board
-  attr_reader :cells
+  attr_reader :cells,
+              :ships_placed
   def initialize
     @cells = make_board
+    @ships_placed = []
   end
+
   def make_board
     @cells = {
    "A1" => Cell.new("A1"),
@@ -23,6 +26,33 @@ class Board
    "D4" => Cell.new("D4")
   }
   end
+
+  #ship placed array
+  #validate all ship placements
+  #shovel/ if does not include coordinates, go ahead and place ship
+  #if does include coordinates, fail
+
+  def ship_is_not_on_ship(ship, coordinates)
+    # require 'pry'; binding.pry
+    if ship_placement(ship, coordinates) == true
+      check = coordinates.all? do |coordinate|
+                @cells[coordinate].empty?
+      end
+      if check == true
+        coordinates.each do |coordinate|
+          @cells[coordinate].place_ship(ship)
+        end
+      else
+          "I'm sorry, you've already placed a ship here!"
+      end
+    end
+  end
+
+
+
+  # def ship_check(ship,coordinates)
+  #   ship_is_not_on_ship(ship, coordinates) && ship_placement(ship, coordinates) == true
+  # end
 
   def valid_coordinate?(coordinates)
     @cells.include?(coordinates)
@@ -60,6 +90,8 @@ class Board
     else
       false
     end
+    # ship_check(ship, coordinates)
+    # ship_is_not_on_ship(ship, coordinates)
   end
 
   def letters_permutations(ship)
