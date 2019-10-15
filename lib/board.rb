@@ -79,7 +79,6 @@ class Board
     letter.each do |letter|
       coordinates_in_ordinal << letter.ord
     end
-
     letters_inside_board = @x.flatten.uniq
     numbers_inside_board = @y.flatten.uniq
     if !(coordinates_in_ordinal - letters_inside_board).empty?
