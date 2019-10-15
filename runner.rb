@@ -19,7 +19,7 @@ if answer == "p"
   puts "Please tell me your name"
   name = gets.chomp
   @player = Player.new(name)
-  play_game
+  play_game_ready
 else
   "Goodbye!"
 end
@@ -65,6 +65,8 @@ end
 
 def computer_player
   @computer = Player.new("Hal")
+  @computer.board.ship_is_not_on_ship(@cruiser, @computer.cruiser_placement)
+  @computer.board.ship_is_not_on_ship(@submarine, @computer.submarine_placement)
 end
 
 
