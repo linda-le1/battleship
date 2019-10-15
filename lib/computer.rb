@@ -1,10 +1,18 @@
 require './lib/board'
 
 class Computer
-  attr_reader :name
+  attr_reader :name, :board, :shot
 
   def initialize(name)
-    @name = name 
+    @name = name
+    @board = Board.new
+  end
+  def shot_choice
+    shot_choices = ["A1", "A2", "A3", "A4",
+                    "B1", "B2", "B3", "B4",
+                    "C1", "C2", "C3", "C4",
+                    "D1", "D2", "D3", "D4"]
+    @shot = shot_choice.shuffle.pop
   end
 
   def cruiser_placement
@@ -29,4 +37,5 @@ class Computer
                                     ["A3", "B3"], ["B3", "C3"], ["C3", "D3"],
                                     ["A4", "B4"], ["B4", "C4"], ["C4", "D4"]]
     possible_submarine_placement.sample
+  end
 end

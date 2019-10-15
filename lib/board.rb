@@ -6,11 +6,6 @@ class Board
               :ships_placed
 
   def initialize
-    @cells = make_board
-    @ships_placed = []
-  end
-
-  def make_board
     @cells = {
    "A1" => Cell.new("A1"),
    "A2" => Cell.new("A2"),
@@ -29,7 +24,29 @@ class Board
    "D3" => Cell.new("D3"),
    "D4" => Cell.new("D4")
   }
+    @ships_placed = []
   end
+
+  # def make_board
+  #   @cells = {
+  #  "A1" => Cell.new("A1"),
+  #  "A2" => Cell.new("A2"),
+  #  "A3" => Cell.new("A3"),
+  #  "A4" => Cell.new("A4"),
+  #  "B1" => Cell.new("B1"),
+  #  "B2" => Cell.new("B2"),
+  #  "B3" => Cell.new("B3"),
+  #  "B4" => Cell.new("B4"),
+  #  "C1" => Cell.new("C1"),
+  #  "C2" => Cell.new("C2"),
+  #  "C3" => Cell.new("C3"),
+  #  "C4" => Cell.new("C4"),
+  #  "D1" => Cell.new("D1"),
+  #  "D2" => Cell.new("D2"),
+  #  "D3" => Cell.new("D3"),
+  #  "D4" => Cell.new("D4")
+  # }
+  # end
 
   #ship placed array
   #validate all ship placements
@@ -37,17 +54,11 @@ class Board
   #if does include coordinates, fail
 
   def ship_is_not_on_ship(ship, coordinates)
-    # if coordinates.each do |coordinate|
-    #     valid_coordinate?(coordinate) == true
-    #     end
-    #     true
-    # else
-    #   puts "I'm sorry, this coordinate is not valid!"
-    # end
+    check = coordinates.all? do |coordinate|
+              @cells[coordinate].ship == nil
+    end
     if ship_placement(ship, coordinates) == true
-      check = coordinates.all? do |coordinate|
-                @cells[coordinate].empty?
-      end
+
       if check == true
         coordinates.each do |coordinate|
           @cells[coordinate].place_ship(ship)

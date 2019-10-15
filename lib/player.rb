@@ -11,11 +11,14 @@ class Player
     @board = Board.new
   end
 
-  def player_guess(coordinate)
-    if @coordinates_guessed.include?(coordinate) == true
+  def player_shot(coordinate, board)
+    if @coordinates_guessed.include?(coordinate)
       puts "You have already tried this spot."
-    else
+    elsif board.valid_coordinate?(coordinate)
+      board.cells[coordinate].fire_upon
       @coordinates_guessed << coordinate
+    else
+      puts "Invalid coordinate please try again."
     end
   end
 
