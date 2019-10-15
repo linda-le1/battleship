@@ -1,5 +1,10 @@
+require './lib/board'
+
 class Player
-  attr_reader :name, :coordinates_guessed
+  attr_reader :name,
+              :coordinates_guessed,
+              :board
+
   def initialize(name)
     @name = name
     @coordinates_guessed = []
@@ -12,4 +17,9 @@ class Player
       @coordinates_guessed << coordinate
     end
   end
+
+  def board
+    @board = Board.new
+  end    
+
 end

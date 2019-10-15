@@ -1,6 +1,10 @@
+require './lib/ship'
+require './lib/cell'
+
 class Board
   attr_reader :cells,
               :ships_placed
+
   def initialize
     @cells = make_board
     @ships_placed = []
@@ -42,7 +46,7 @@ class Board
           @cells[coordinate].place_ship(ship)
         end
       else
-          "I'm sorry, you've already placed a ship here!"
+          "I'm sorry, this coordinate is not valid!"
       end
     end
   end
