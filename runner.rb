@@ -5,7 +5,6 @@ require './lib/player'
 require 'pry'
 
 def setup
-@computer_board = Board.new
 @cruiser = Ship.new("Cruiser", 3)
 @submarine = Ship.new("Submarine", 2)
 @player_cruiser_coordinates = []
@@ -56,13 +55,18 @@ def play_game_ready
 end
 
 def game_play
-  
+
     while @ship.sunk? == false
       puts "Enter a guess:"
       @player.player_guess(coordinate)
     end
       puts "Game over!"
 end
+
+def computer_player
+  @computer = Player.new("Hal")
+end
+
 
 setup
 game_start
