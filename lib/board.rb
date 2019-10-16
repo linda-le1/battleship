@@ -62,9 +62,12 @@ class Board
   end
 
   def place_ship_on_board(ship, coordinates)
-    coordinates.each do |coordinate|
-      @cells[coordinate].place_ship(ship)
+    if ship_is_not_on_ship(ship, coordinates)
+      coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
+      end
     end
+    @ships_placed << coordinates
   end
 
   # def ship_check(ship,coordinates)

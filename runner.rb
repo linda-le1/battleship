@@ -46,26 +46,31 @@ def game_play
     @computer.board.render
     puts "\nYour Board"
     @player.board.render
-    all_player_sunk = @player_ships.all? do |ship|
-      ship.sunk? == false
-    end
-    all_computer_sunk = @computer_ships.all? do |ship|
-      ship.sunk? == false
-    end
-    until !all_player_sunk || !all_computer_sunk do
+    until @player.all_ships_sunk? || @computer.all_ships_sunk? do
       @player.player_shot(@computer.board)
       puts "#{@computer.name}'s turn."
-      @player.board.fire(@computer.shot_choice)
-      puts "#{@computer.name} guesses #{@computer.shot}"
+      @computer.shot_choice
+      #require 'pry'; binding.pry
       @player.board.fire(@computer.shot)
+      puts "#{@computer.name} guesses #{@computer.shot}"
       @computer.board.render
       @player.board.render
     end
     puts "Game over!"
+    game_over
 end
 
 def game_over
- puts   "Goodbye!"
+  puts "Would you like to play again?"
+  puts "Enter p to play."
+  puts "Enter q to quit."
+  answer = gets.chomp
+    if answer == "p"
+      puts "#{@player.name}, Welcome to the next round."
+      play_game_ready
+    else
+      puts "Goodbye!"
+    end
 end
 
 setup

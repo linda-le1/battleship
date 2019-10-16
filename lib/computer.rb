@@ -1,5 +1,6 @@
 require './lib/board'
 require './lib/cell'
+require './lib/ship'
 
 class Computer
   attr_reader :name, :board, :shot
@@ -7,14 +8,17 @@ class Computer
   def initialize(name)
     @name = name
     @board = Board.new
-  end
-
-  def shot_choice
-    shot_choices = ["A1", "A2", "A3", "A4",
+    @guessed_coordinates = []
+    @shot_choices = ["A1", "A2", "A3", "A4",
                     "B1", "B2", "B3", "B4",
                     "C1", "C2", "C3", "C4",
                     "D1", "D2", "D3", "D4"]
-    @shot = shot_choices.shuffle.pop
+  end
+
+  def shot_choice
+
+    @shot = @shot_choices.delete(@shot_choices.sample)
+    @shot_choices
   end
 
   def cruiser_placement
@@ -42,6 +46,15 @@ class Computer
                                     ["A4", "B4"], ["B4", "C4"], ["C4", "D4"]]
     submarine_coordinates = possible_submarine_placement.sample
     ship = Ship.new("Computer Submarine", 2)
-    @board.place_ship_on_board(ship, submarine_coordinates)
+    if @board.ship_is_not_on_ship(ship, submarine_coordinates) != true
+      submarine_placement
+    else @board.place_ship_on_board(ship, submarine_coordinates)
+    end
+  end
+
+  def all_ships_sunk?
+    @board.ships_placed.flatten.all? do |coordinate|
+      @board.cells[coordinate].fired_upon_status == true
+    end
   end
 end
