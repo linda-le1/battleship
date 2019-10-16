@@ -3,7 +3,7 @@ require './lib/cell'
 require './lib/ship'
 
 class Computer
-  attr_reader :name, :board, :shot
+  attr_reader :name, :board, :shot, :shot_choices
 
   def initialize(name)
     @name = name
