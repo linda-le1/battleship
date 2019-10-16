@@ -28,7 +28,7 @@ class Player
   end
 
   def enter_ship_coordinates(ship)
-    puts "Enter the squares for the #{ship.name} (#{ship.length} spaces):"
+    puts "Enter the squares for the #{ship.name} for #{ship.length} spaces):"
     player_ship_coordinates = gets.chomp.split(", ")
     if player_ship_coordinates.length != ship.length
       enter_ship_coordinates(ship)
