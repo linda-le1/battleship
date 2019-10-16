@@ -1,4 +1,5 @@
 require './lib/board'
+require './lib/ship'
 
 class Player
   attr_reader :name,
@@ -45,5 +46,10 @@ class Player
     end
   end
 
-
+  def all_ships_sunk?
+    # require 'pry'; binding.pry
+    @board.ships_placed.flatten.all? do |coordinate|
+      @board.cells[coordinate].fired_upon_status == true
+    end
+  end
 end

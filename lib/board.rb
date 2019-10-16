@@ -67,6 +67,7 @@ class Board
         @cells[coordinate].place_ship(ship)
       end
     end
+    @ships_placed << coordinates
   end
 
   # def ship_check(ship,coordinates)

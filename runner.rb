@@ -46,13 +46,7 @@ def game_play
     @computer.board.render
     puts "\nYour Board"
     @player.board.render
-    all_player_sunk = @player_ships.all? do |ship|
-      ship.sunk? == false
-    end
-    all_computer_sunk = @computer_ships.all? do |ship|
-      ship.sunk? == false
-    end
-    until !all_player_sunk || !all_computer_sunk do
+    until @player.all_ships_sunk? || @computer.all_ships_sunk? do
       @player.player_shot(@computer.board)
       puts "#{@computer.name}'s turn."
       @computer.shot_choice
@@ -63,6 +57,7 @@ def game_play
       @player.board.render
     end
     puts "Game over!"
+    game_over
 end
 
 def game_over
@@ -71,7 +66,7 @@ def game_over
   puts "Enter q to quit."
   answer = gets.chomp
     if answer == "p"
-      puts "#{player.name}, Welcome to the next round."
+      puts "#{@player.name}, Welcome to the next round."
       play_game_ready
     else
       puts "Goodbye!"

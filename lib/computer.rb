@@ -1,5 +1,6 @@
 require './lib/board'
 require './lib/cell'
+require './lib/ship'
 
 class Computer
   attr_reader :name, :board, :shot
@@ -48,6 +49,12 @@ class Computer
     if @board.ship_is_not_on_ship(ship, submarine_coordinates) != true
       submarine_placement
     else @board.place_ship_on_board(ship, submarine_coordinates)
+    end
+  end
+
+  def all_ships_sunk?
+    @board.ships_placed.flatten.all? do |coordinate|
+      @board.cells[coordinate].fired_upon_status == true
     end
   end
 end
