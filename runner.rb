@@ -31,13 +31,13 @@ def game_start
 end
 
 def play_game_ready
-  puts "Okay, I have laid out my ships on the grid."
+  puts "Okay #{@player.name}, I have laid out my ships on the grid."
   puts "You now need to lay out your two ships."
   puts "The cruiser is 3 units long. The submarine is 2 units long."
   @player.enter_ship_coordinates(@cruiser)
   @player.enter_ship_coordinates(@submarine)
-  @computer.enter_ship_coordinates(@compcruiser)
-  @computer.enter_ship_coordinates(@compsubmarine)
+  @computer.cruiser_placement
+  @computer.submarine_placement
   game_play
 end
 
@@ -55,7 +55,7 @@ def game_play
     until !all_player_sunk || !all_computer_sunk do
       @player.player_shot(@computer.board)
       puts "#{@computer.name}'s turn."
-      @computer.board.fire(@computer.shot_choice)
+      @player.board.fire(@computer.shot_choice)
       puts "#{@computer.name} guesses #{@computer.shot}"
       @player.board.fire(@computer.shot)
       @computer.board.render

@@ -1,5 +1,6 @@
 require './lib/ship'
 require './lib/cell'
+require './lib/player'
 
 class Board
   attr_reader :cells,
@@ -55,22 +56,18 @@ class Board
 
   def ship_is_not_on_ship(ship, coordinates)
     check = coordinates.all? do |coordinate|
-              @cells[coordinate].ship == nil
+      @cells[coordinate].ship == nil
     end
-    if ship_placement(ship, coordinates) == true
+    check
+  end
 
-      if check == true
-        coordinates.each do |coordinate|
-          @cells[coordinate].place_ship(ship)
-        end
-      else
-          "I'm sorry, this coordinate is not valid!"
+  def place_ship_on_board(ship, coordinates)
+    if ship_placement(ship, coordinates) == true
+      coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
       end
     end
   end
-
-
-
 
   # def ship_check(ship,coordinates)
   #   ship_is_not_on_ship(ship, coordinates) && ship_placement(ship, coordinates) == true
@@ -87,17 +84,23 @@ class Board
     letter = coordinates.map { |coordinates| coordinates[0] }
     number = coordinates.map { |coordinates| coordinates[1].to_i }
     coordinates_in_ordinal = []
+
     letter.each do |letter|
       coordinates_in_ordinal << letter.ord
     end
-    letters_inside_board = @x.flatten.uniq
-    numbers_inside_board = @y.flatten.uniq
-    if !(coordinates_in_ordinal - letters_inside_board).empty?
-      return false
+
+    if !valid_coordinate?(coordinates)
+      false
     end
-    if !(number - numbers_inside_board).empty?
-      return false
-    end
+
+    # letters_inside_board = @x.flatten.uniq
+    # numbers_inside_board = @y.flatten.uniq
+    # if !(coordinates_in_ordinal - letters_inside_board).empty?
+    #   false
+    # end
+    # if !(number - numbers_inside_board).empty?
+    #   false
+    # end
 
     if ship.length == coordinates.length
       ship_valid = false

@@ -1,4 +1,5 @@
 require './lib/board'
+require './lib/cell'
 
 class Computer
   attr_reader :name, :board, :shot
@@ -25,7 +26,9 @@ class Computer
                                   ["A2", "B2", "C2"], ["B2", "C2", "D2"],
                                   ["A3", "B3", "C3"], ["B3", "C3", "D3"],
                                   ["A4", "B4", "C4"], ["B4", "C4", "D4"]]
-    possible_cruiser_placement.sample
+    cruiser_coordinates = possible_cruiser_placement.sample
+    ship =  Ship.new("Computer Cruiser", 3);
+    @board.place_ship_on_board(ship, cruiser_coordinates)
   end
 
   def submarine_placement
@@ -37,6 +40,8 @@ class Computer
                                     ["A2", "B2"], ["B2", "C2"], ["C2", "D2"],
                                     ["A3", "B3"], ["B3", "C3"], ["C3", "D3"],
                                     ["A4", "B4"], ["B4", "C4"], ["C4", "D4"]]
-    possible_submarine_placement.sample
+    submarine_coordinates = possible_submarine_placement.sample
+    ship = Ship.new("Computer Submarine", 2)
+    @board.place_ship_on_board(ship, submarine_coordinates)
   end
 end
