@@ -62,10 +62,8 @@ class Board
   end
 
   def place_ship_on_board(ship, coordinates)
-    if ship_placement(ship, coordinates) == true
-      coordinates.each do |coordinate|
-        @cells[coordinate].place_ship(ship)
-      end
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
     end
   end
 
@@ -77,7 +75,7 @@ class Board
     @cells.include?(coordinates)
   end
 
-  def ship_placement(ship, coordinates)
+  def is_valid_ship_placement(ship, coordinates)
     numbers_permutations(ship)
     letters_permutations(ship)
 
@@ -135,9 +133,9 @@ class Board
     letter = coordinates.map { |coordinates| coordinates[0] }
     number = coordinates.map { |coordinates| coordinates[1] }
     if ship.length == coordinates.length
-      if number.uniq.count == ship.length && letter.uniq.count == 1
+      if number.uniq.count == ship.length && letter.uniq.count == 1 && is_consecutive_numbers(number)
         true
-      elsif letter.uniq.count == ship.length && number.uniq.count == 1
+      elsif letter.uniq.count == ship.length && number.uniq.count == 1 && is_consecutive_letters(letter)
         true
       else
         false
@@ -145,6 +143,16 @@ class Board
     else
       false
     end
+  end
+
+  def is_consecutive_numbers(numbers)
+    numbers = numbers.sort
+    numbers.each_cons(2).all? { |a, b| b.to_i == a.to_i + 1 }
+  end
+
+  def is_consecutive_letters(letters)
+    letters = letters.sort
+    letters.each_cons(2).all? { |a, b| b.ord == a.ord + 1 }
   end
 
   def render(status = false)

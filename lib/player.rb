@@ -37,7 +37,7 @@ class Player
         @board.valid_coordinate?(coordinate) == true
     end
 
-    if all_coordinates_valid && @board.ship_is_not_on_ship(ship, player_ship_coordinates)
+    if all_coordinates_valid && @board.ship_is_not_on_ship(ship, player_ship_coordinates) && @board.is_valid_ship_placement(ship, player_ship_coordinates)
       @board.place_ship_on_board(ship, player_ship_coordinates)
     else
       puts "Invalid coordinates. Please try again."
