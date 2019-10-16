@@ -7,14 +7,16 @@ class Computer
   def initialize(name)
     @name = name
     @board = Board.new
+    @guessed_coordinates = []
   end
 
   def shot_choice
-    shot_choices = ["A1", "A2", "A3", "A4",
+    @shot_choices = ["A1", "A2", "A3", "A4",
                     "B1", "B2", "B3", "B4",
                     "C1", "C2", "C3", "C4",
                     "D1", "D2", "D3", "D4"]
-    @shot = shot_choices.shuffle.pop
+    @shot = @shot_choices.delete(@shot_choices.sample)
+
   end
 
   def cruiser_placement

@@ -56,6 +56,7 @@ def game_play
       @player.player_shot(@computer.board)
       puts "#{@computer.name}'s turn."
       @computer.shot_choice
+      #require 'pry'; binding.pry
       @player.board.fire(@computer.shot)
       puts "#{@computer.name} guesses #{@computer.shot}"
       @computer.board.render
