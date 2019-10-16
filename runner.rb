@@ -66,7 +66,16 @@ def game_play
 end
 
 def game_over
- puts   "Goodbye!"
+  puts "Would you like to play again?"
+  puts "Enter p to play."
+  puts "Enter q to quit."
+  answer = gets.chomp
+    if answer == "p"
+      puts "#{player.name}, Welcome to the next round."
+      play_game_ready
+    else
+      puts "Goodbye!"
+    end
 end
 
 setup
