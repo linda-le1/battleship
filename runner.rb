@@ -55,9 +55,9 @@ def game_play
     until !all_player_sunk || !all_computer_sunk do
       @player.player_shot(@computer.board)
       puts "#{@computer.name}'s turn."
-      @player.board.fire(@computer.shot_choice)
-      puts "#{@computer.name} guesses #{@computer.shot}"
+      @computer.shot_choice
       @player.board.fire(@computer.shot)
+      puts "#{@computer.name} guesses #{@computer.shot}"
       @computer.board.render
       @player.board.render
     end
